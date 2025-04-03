@@ -214,5 +214,14 @@
 
         animateCoins();
     </script>
+    <script>
+        // JavaScript to toggle the navigation menu
+        const menuToggle = document.querySelector('.menu-toggle');
+        const responsiveMenu = document.querySelector('.responsive-menu');
+
+        menuToggle.addEventListener('click', () => {
+            responsiveMenu.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
