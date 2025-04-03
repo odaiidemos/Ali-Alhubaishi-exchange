@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>علي الحبيشي للصرافة والتحويلات</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img src="logo.png" alt="شعار الموقع" class="logo">
+        </a>
+        <h1>علي الحبيشي للصرافة والتحويلات</h1>
+        <button class="menu-toggle" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav class="menu responsive-menu">
+            <a href="./login.html">تسجيل الدخول</a>
+            <a href="#features">المميزات</a>
+            <a href="./admin.html">لوحة الإدارة</a>
+            <a href="#exchange-rates">أسعار الصرف</a>
+            <button id="dark-mode-toggle" class="icon-button darkButton" aria-label="Toggle Dark Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </nav>
+    </header>
+    
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero full-height">
+            <div class="hero-content">
+                <h2>أفضل خدمات الصرافة والتحويلات</h2>
+                <p>تحويلات مالية سريعة وآمنة بأسعار تنافسية. أرسل الأموال بثقة وسهولة.</p>
+                <a href="login.html" class="cta-button">ابدأ الآن</a>
+            </div>
+            <!-- Canvas for coin textures, positioned absolutely to avoid affecting text -->
+            <canvas id="coinCanvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;"></canvas>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features full-height">
+            <h3 class="section-title">مميزاتنا</h3>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <i class="fas fa-shield-alt feature-icon"></i>
+                    <h4>الأمان</h4>
+                    <p>نضمن لك أعلى مستويات الأمان في جميع معاملاتك المالية.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-clock feature-icon"></i>
+                    <h4>السرعة</h4>
+                    <p>تحويلات مالية فورية لتلبية احتياجاتك في الوقت المناسب.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-globe feature-icon"></i>
+                    <h4>التغطية العالمية</h4>
+                    <p>شبكة واسعة تغطي جميع أنحاء العالم لتحويلاتك المالية.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exchange Rates Section -->
+        <section id="exchange-rates" class="exchange-rates full-height">
+            <h3>أسعار الصرف الحالية</h3>
+            <table id="exchange-rates-table">
+                <thead>
+                    <tr>
+                        <th>العملة</th>
+                        <th>الكود</th>
+                        <th>السعر</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rates will be dynamically populated -->
+                </tbody>
+            </table>
+        </section>
+
+        <section id="currency-animation" class="">
+            <div class="currency-emojis currency-emoji">
+                <span>💵</span>
+                <span>💶</span>
+                <span>💷</span>
+                <span>💴</span>
+                <span>🪙</span>
+            </div>
+        </section>
+
+        <!-- Location Section -->
+        <section id="location" class="location full-height" style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+    
+                <div class="location-text" style="width: 30%; text-align: center;">
+                    <h3>موقعنا</h3>
+                    <p>اليمن، صنعاء، شارع تعز، جوار شركة بازرعة لقطع غيار السيارات</p>
+                </div>
+                <div class="location-map" style="width: 70%; margin: 20px; display: flex; justify-content: center; align-items: center;">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d366.645210359179!2d44.22866092371146!3d15.320213964420288!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m5!1s0x1603dabf61cc24af%3A0xbdb785c551030199!2zQWxpIEh1YmFpc2hpIGZvciBFeGNoYW5nZSDYudmE2Yog2KfZhNit2KjZiti02Yog2YTZhNi12LHYp9mB2Kk!3m2!1d15.320298399999999!2d44.2289647!4m0!5e0!3m2!1sen!2s!4v1743696443410!5m2!1sen!2s" 
+                        width="100%" 
+                        height="500" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                
+            
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-links">
+            <!-- Removed link to about.html -->
+            <a href="terms.html">الشروط</a>
+            <a href="privacy.html">الخصوصية</a>
+        </div>
+        <div class="social-icons">
+            <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                <i class="fab fa-facebook"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+        <p>&copy; 2025 علي الحبيشي للصرافة والتحويلات. جميع الحقوق محفوظة.</p>
+        <p>تطوير وتصميم عبدالحميدالحبيشي</p>
+    </footer>
+    
+    <script src="main.js"></script>
+    <script src="darkmode.js"></script>
+    <script>
+        // JavaScript to render coin textures with collision-based interaction
+        const canvas = document.getElementById('coinCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Set canvas dimensions to match the hero section
+        function resizeCanvas() {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+        }
+
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const coins = [
+            { x: 100, y: 150, radius: 50, color: 'gold', text: 'USD', dx: 2, dy: 1 },
+            { x: 300, y: 250, radius: 50, color: 'silver', text: 'EUR', dx: -1.5, dy: 1.2 },
+            { x: 700, y: 450, radius: 50, color: '#f43f5e', text: 'JPY', dx: -2, dy: 1 },
+            { x: 900, y: 550, radius: 50, color: 'lightblue', text: 'YER', dx: 1.5, dy: -1.2 }
+        ];
+
+        function drawCoin(coin) {
+            // Draw coin circle
+            ctx.beginPath();
+            ctx.arc(coin.x, coin.y, coin.radius, 0, Math.PI * 2);
+            ctx.fillStyle = coin.color;
+            ctx.fill();
+            ctx.closePath();
+
+            // Add coin text
+            ctx.fillStyle = 'white'; // Changed from black to white
+            ctx.font = '20px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(coin.text, coin.x, coin.y);
+        }
+
+        function checkCollision(coin1, coin2) {
+            const dx = coin1.x - coin2.x;
+            const dy = coin1.y - coin2.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            return distance < coin1.radius + coin2.radius;
+        }
+
+        function animateCoins() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            coins.forEach((coin, index) => {
+                drawCoin(coin);
+
+                // Update coin position
+                coin.x += coin.dx;
+                coin.y += coin.dy;
+
+                // Bounce off edges
+                if (coin.x + coin.radius > canvas.width || coin.x - coin.radius < 0) {
+                    coin.dx *= -1;
+                }
+                if (coin.y + coin.radius > canvas.height || coin.y - coin.radius < 0) {
+                    coin.dy *= -1;
+                }
+
+                // Check for collisions with other coins
+                for (let i = index + 1; i < coins.length; i++) {
+                    if (checkCollision(coin, coins[i])) {
+                        // Swap directions
+                        [coin.dx, coins[i].dx] = [coins[i].dx, coin.dx];
+                        [coin.dy, coins[i].dy] = [coins[i].dy, coin.dy];
+
+                        // Change colors on collision
+                        const tempColor = coin.color;
+                        coin.color = coins[i].color;
+                        coins[i].color = tempColor;
+                    }
+                }
+            });
+            requestAnimationFrame(animateCoins);
+        }
+
+        animateCoins();
+    </script>
+</body>
+</html>

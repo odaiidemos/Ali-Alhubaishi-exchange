@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول / إنشاء حساب</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img src="logo.png" alt="شعار الموقع" class="logo">
+        </a>
+        <h1>علي الحبيشي للصرافة والتحويلات</h1>
+    </header>
+    <main>
+        <section id="auth-section" class="card" style="max-width: 400px;">
+            <h2>تسجيل الدخول</h2>
+            <form id="login-form">
+                <label for="username">اسم المستخدم:</label>
+                <input type="text" id="username" required>
+                <label for="password">كلمة المرور:</label>
+                <input type="password" id="password" required>
+                <button type="submit" id="login-btn">تسجيل الدخول</button>
+                <p id="login-error" class="error" style="margin-top: 10px; color: red;"></p>
+            </form>
+            <p>لا تملك حساباً؟ <a href="#" id="show-signup">إنشاء حساب</a></p>
+        </section>
+
+        <section id="signup-section" class="card" style="display: none; max-width: 400px;">
+            <h2>إنشاء حساب</h2>
+            <form id="signup-form">
+                <label for="new-username">اسم المستخدم:</label>
+                <input type="text" id="new-username" required>
+                <label for="email">البريد الإلكتروني:</label>
+                <input type="email" id="email" required>
+                <label for="new-password">كلمة المرور:</label>
+                <input type="password" id="new-password" required>
+                <label for="interests">اختر اهتماماتك:</label>
+                <select id="interests" name="interests" multiple required>
+                    <option value="currency-exchange">تبادل العملات</option>
+                    <option value="money-transfer">تحويل الأموال</option>
+                    <option value="financial-advice">النصائح المالية</option>
+                    <option value="investment">الاستثمار</option>
+                    <option value="savings">الادخار</option>
+                </select>
+                <button type="button" id="select-all-btn">تحديد الكل</button>
+                <button type="submit" id="signup-btn">إنشاء حساب</button>
+            </form>
+            <p id="signup-success" class="success"></p>
+            <p>لديك حساب بالفعل؟ <a href="#" id="show-login">تسجيل الدخول</a></p>
+        </section>
+
+        <!-- Updated user-info section to display account number and balances dynamically -->
+        <section id="user-info" class="card" style="display: none; max-width: 600px; margin: 20px auto;">
+            <h2 class="text-center">مرحباً، <span id="user-name"></span></h2>
+            <p class="text-center">البريد الإلكتروني: <span id="user-email"></span></p>
+            <p class="text-center">رقم الحساب: <span id="account-number"></span></p>
+            <div class="user-dashboard">
+                <h3>رصيد الحساب</h3>
+                <ul id="balances-list">
+                    <!-- Balances will be generated dynamically -->
+                </ul>
+                <ul>
+                    <li>عدد التحويلات: <span id="user-transactions">0</span></li>
+                </ul>
+                <button id="logout-btn" class="btn btn-primary w-100 mt-2">تسجيل الخروج</button>
+            </div>
+        </section>
+          
+
+        <section id="actions-container" style="display: none; margin: 20px auto; max-width: 900px; display: none; gap: 20px; flex-wrap: wrap;">
+            <section id="exchange-form" class="card" style="flex: 1; min-width: 300px;">
+                <h2 class="text-center">تحويل العملات</h2>
+                <form id="currency-form" style="max-width: 400px; margin: 0 auto;">
+                    <label for="from-currency">من:</label>
+                    <select id="from-currency">
+                        <!-- Options will be dynamically populated -->
+                    </select>
+                    <label for="to-currency">إلى:</label>
+                    <select id="to-currency">
+                        <!-- Options will be dynamically populated -->
+                    </select>
+                    <label for="amount">المبلغ:</label>
+                    <input type="number" id="amount" required>
+                    <button type="button" id="exchange-btn" class="btn btn-primary w-100 mt-2">تحويل</button>
+                </form>
+                <p id="result" class="text-center mt-2"></p>
+            </section>
+
+            <section id="transfer-form" class="card" style="flex: 1; min-width: 300px;">
+                <h2 class="text-center">تحويل الأموال إلى مستخدم آخر</h2>
+                <form id="money-transfer-form" style="max-width: 400px; margin: 0 auto;">
+                    <label for="recipient-username">اسم المستخدم المستلم:</label>
+                    <input type="text" id="recipient-username" placeholder="أدخل اسم المستخدم" required>
+                    <label for="transfer-amount">المبلغ:</label>
+                    <input type="number" id="transfer-amount" placeholder="أدخل المبلغ" required>
+                    <button type="button" id="transfer-btn" class="btn btn-primary w-100 mt-2">إرسال</button>
+                </form>
+                <p id="transfer-result" class="text-center mt-2"></p>
+            </section>
+        </section>
+    </main>
+    <script type="module">
+        import { validateLoginForm, validateSignupForm } from './validation.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginSection = document.getElementById('auth-section');
+            const signupSection = document.getElementById('signup-section');
+            const exchangeForm = document.getElementById('exchange-form');
+            const userInfoSection = document.getElementById('user-info');
+            const userNameSpan = document.getElementById('user-name');
+            const userEmailSpan = document.getElementById('user-email');
+            const logoutBtn = document.getElementById('logout-btn');
+            const showSignupLink = document.getElementById('show-signup');
+            const showLoginLink = document.getElementById('show-login');
+
+            showSignupLink.addEventListener('click', () => {
+                loginSection.style.display = 'none';
+                signupSection.style.display = 'block';
+            });
+
+            showLoginLink.addEventListener('click', () => {
+                signupSection.style.display = 'none';
+                loginSection.style.display = 'block';
+            });
+
+            const loginForm = document.getElementById('login-form');
+            const loginError = document.getElementById('login-error');
+
+            loginForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const username = document.getElementById('username').value.trim();
+                const password = document.getElementById('password').value.trim();
+
+                const error = validateLoginForm(username, password);
+                if (error) {
+                    loginError.textContent = error;
+                    loginError.style.color = 'red';
+                } else {
+                    const users = JSON.parse(localStorage.getItem('users')) || [];
+                    const user = users.find(user => user.username === username && user.password === password);
+
+                    if (user) {
+                        loginError.textContent = '';
+
+                        loginSection.style.display = 'none';
+                        userInfoSection.style.display = 'block';
+                        document.getElementById('actions-container').style.display = 'flex';
+
+                        userNameSpan.textContent = user.username;
+                        userEmailSpan.textContent = user.email;
+                    } else {
+                        loginError.textContent = 'اسم المستخدم أو كلمة المرور غير صحيحة.';
+                        loginError.style.color = 'red';
+
+                        showSignupLink.style.animation = 'glow 1s infinite alternate';
+                    }
+                }
+            });
+
+            logoutBtn.addEventListener('click', () => {
+                userInfoSection.style.display = 'none';
+                document.getElementById('actions-container').style.display = 'none';
+                loginSection.style.display = 'block';
+            });
+
+            const signupForm = document.getElementById('signup-form');
+            const signupSuccess = document.getElementById('signup-success');
+
+            signupForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const newUsername = document.getElementById('new-username').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const newPassword = document.getElementById('new-password').value.trim();
+
+                const error = validateSignupForm(newUsername, email, newPassword);
+                if (error) {
+                    signupSuccess.textContent = error;
+                    signupSuccess.style.color = 'red';
+                } else {
+                    const users = JSON.parse(localStorage.getItem('users')) || [];
+
+                    if (users.some(user => user.username === newUsername)) {
+                        signupSuccess.textContent = 'اسم المستخدم موجود بالفعل.';
+                        signupSuccess.style.color = 'red';
+                        return;
+                    }
+
+                    users.push({ username: newUsername, email, password: newPassword });
+                    localStorage.setItem('users', JSON.stringify(users));
+
+                    signupSuccess.textContent = 'تم إنشاء الحساب بنجاح!';
+                    signupSuccess.style.color = 'green';
+
+                    setTimeout(() => {
+                        signupSuccess.textContent = '';
+                        showLoginLink.click();
+                    }, 2000);
+                }
+            });
+
+            document.getElementById('select-all-btn').addEventListener('click', () => {
+                const interests = document.getElementById('interests');
+                for (let i = 0; i < interests.options.length; i++) {
+                    interests.options[i].selected = true;
+                }
+            });
+        });
+    </script>
+    
+    <script src="main.js"></script>
+    <script src="darkmode.js"></script>
+</body>
+</html>

@@ -1,0 +1,1268 @@
+:root {
+    /* Updated modern color palette */
+    --primary-color: #4f46e5; /* Indigo */
+    --secondary-color: #64748b; /* Slate */
+    --accent-color: #f43f5e; /* Rose */
+    --background-gradient: linear-gradient(135deg, #f8fafc, #e2e8f0); /* Light Gray */
+    --text-color: #1e293b; /* Dark Slate */
+    --light-gray: #e2e8f0;
+    --dark-gray: #334155; /* Darker Slate */
+    --hover-gray: #94a3b8; /* Muted Slate */
+    --error-color: #dc2626; /* Red */
+    --success-color: #16a34a; /* Green */
+    --footer-gradient: linear-gradient(135deg, #1e293b, #0f172a); /* Darker Slate */
+    --hover-accent-color: #dc2626; /* Light Rose */
+    --button-hover-gradient: linear-gradient(135deg, #4f46e5, #4338ca); /* Indigo Gradient */
+    --table-row-hover: #f1f5f9; /* Light Gray */
+    --table-row-alt: #e2e8f0; /* Alternate Row */
+
+    /* Add dark mode variables */
+    --dark-background: #1e293b;
+    --dark-card-background: #334155;
+    --dark-text-color: #f8fafc;
+    --dark-header-background: #334155;
+    --dark-footer-background: #0f172a;
+    --dark-table-header: #64748b;
+    --dark-table-row-hover: #475569;
+}
+html {
+    scroll-behavior: smooth;
+}
+
+/* Typography */
+body {
+    font-family: 'Inter', 'Tajawal', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-color);
+    background: var(--background-gradient);
+    margin: 0;
+    padding: 0;
+    
+}
+
+/* Refine dark mode styles for better contrast and readability */
+body.dark-mode {
+    background: #121212; /* Darker background for better contrast */
+    color: #e0e0e0; /* Softer text color for readability */
+}
+
+/* Fix dark mode for header */
+body.dark-mode header {
+    background-color: var(--dark-header-background);
+    color: var(--dark-text-color);
+}
+
+body.dark-mode header .logo {
+    filter: brightness(0.8);
+}
+
+body.dark-mode .card {
+    background: #1e1e1e; /* Darker card background */
+    color: #e0e0e0; /* Softer text color */
+    border: 1px solid #333333; /* Add subtle border for definition */
+}
+
+body.dark-mode .table th {
+    background: #2a2a2a; /* Darker table header */
+    color: #ffffff; /* Ensure text is readable */
+}
+
+body.dark-mode .table td {
+    color: #e0e0e0; /* Softer text color */
+}
+
+body.dark-mode .table tr:hover {
+    background: #333333; /* Slightly lighter hover effect */
+}
+
+body.dark-mode footer {
+    background: #1a1a1a; /* Darker footer background */
+    color: #e0e0e0; /* Softer text color */
+}
+
+body.dark-mode a {
+    color: #bb86fc; /* Accent color for links */
+    text-decoration: none;
+}
+
+body.dark-mode a:hover {
+    color: #ff79c6; /* Brighter hover color */
+    text-shadow: 0 2px 4px rgba(255, 121, 198, 0.5); /* Add glow effect */
+}
+
+body.dark-mode button {
+    background: var(--accent-color); /* Darker button background */
+    color: #e0e0e0; /* Softer text color */
+    border: 1px solid #444444; /* Subtle border */
+}
+body.dark-mode #dark-mode-toggle{
+    background: #444444;
+}
+
+body.dark-mode button:hover {
+    background: #444444; /* Slightly lighter hover effect */
+    color: #ffffff; /* Ensure text is readable */
+}
+
+/* Dark mode for responsive navigation */
+body.dark-mode nav.menu {
+    background-color: var(--dark-header-background);
+}
+
+body.dark-mode .menu-toggle {
+    color: var(--dark-text-color);
+}
+
+/* Dark mode for #home section */
+body.dark-mode #home {
+    background: var(--dark-background);
+    color: var(--dark-text-color);
+}
+
+body.dark-mode #home h2 {
+    color: var(--primary-color);
+    text-shadow: none;
+}
+
+body.dark-mode #home p {
+    color: var(--dark-text-color);
+}
+
+body.dark-mode #home a {
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    color: var(--dark-text-color);
+}
+
+body.dark-mode #home a:hover {
+    background: linear-gradient(to right, var(--hover-accent-color), var(--primary-color));
+}
+
+/* Fix dark mode for hero section */
+body.dark-mode #hero {
+    background: var(--dark-background);
+    color: var(--dark-text-color);
+}
+
+body.dark-mode #hero h2 {
+    color: var(--primary-color);
+    text-shadow: none;
+}
+
+body.dark-mode #hero p {
+    color: var(--dark-text-color);
+}
+
+body.dark-mode #hero a {
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    color: var(--dark-text-color);
+}
+
+body.dark-mode #hero a:hover {
+    background: linear-gradient(to right, var(--hover-accent-color), var(--primary-color));
+}
+
+/* Fix dark mode for other sections */
+body.dark-mode section {
+    background: var(--dark-card-background);
+    color: var(--dark-text-color);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode section h2, 
+body.dark-mode section h3 {
+    color: var(--primary-color);
+}
+
+body.dark-mode section p {
+    color: var(--dark-text-color);
+}
+
+/* Fix dark mode for feature cards */
+body.dark-mode .feature-item {
+    background: var(--dark-card-background);
+    color: var(--dark-text-color);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .feature-item h4 {
+    color: var(--primary-color);
+}
+
+body.dark-mode .feature-item p {
+    color: var(--dark-text-color);
+}
+
+/* Fix dark mode for tables */
+body.dark-mode .table th {
+    background: var(--dark-table-header);
+    color: var(--dark-text-color);
+}
+
+body.dark-mode .table td {
+    background: var(--dark-card-background);
+    color: var(--dark-text-color);
+}
+
+body.dark-mode .table tr:hover {
+    background: var(--dark-table-row-hover);
+}
+
+/* Fix dark mode for currency prices table */
+body.dark-mode .exchange-rates tr:nth-child(even) {
+    background: var(--dark-card-background);
+}
+
+body.dark-mode .exchange-rates tr:nth-child(odd) {
+    background: var(--dark-gray);
+}
+
+/* Fix dark mode for footer */
+body.dark-mode footer {
+    background: var(--dark-footer-background);
+    color: var(--dark-text-color);
+    border-top: 2px solid var(--primary-color);
+}
+
+/* Fix dark mode for currency emojis */
+body.dark-mode .currency-emojis span {
+    color: var(--primary-color);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Fix dark mode for #currency-animation section */
+body.dark-mode #currency-animation {
+    background: var(--dark-card-background);
+    color: var(--dark-text-color);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--dark-gray);
+}
+
+body.dark-mode #currency-animation h2, 
+body.dark-mode #currency-animation p {
+    color: var (--dark-text-color);
+}
+
+/* Update dark mode background for admin page */
+body.dark-mode #admin-dashboard {
+    background: var(--text-color); /* Use text color for background in dark mode */
+    color: var(--accent-color); /* Ensure text color is readable */
+}
+
+/* Update dark mode background for statistics cards */
+body.dark-mode .analytics-item {
+    background: var(--text-color); /* Use text color for background in dark mode */
+    color: var(--accent-color); /* Ensure text color is readable */
+}
+
+/* Header */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+}
+
+header .logo {
+    max-height: 80px;
+    border-radius: 50%;
+}
+
+/* Navigation */
+nav.menu {
+    display: flex;
+    gap: 1rem;
+}
+
+nav.menu a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav.menu a:hover {
+    color: var(--hover-accent-color);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1); /* Add slight scaling effect */
+    transition: color 0.3s, text-shadow 0.3s, transform 0.3s;
+}
+
+/* Toggle Button for Mobile Navigation */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Forms */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+form input, form select, form button {
+    padding: 0.75rem;
+    border: 1px solid var(--light-gray);
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+form button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+form button:hover {
+    background: var(--button-hover-gradient);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+form button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode for forms */
+body.dark-mode form {
+    background: var(--dark-card-background);
+    color: var(--dark-text-color);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode form input,
+body.dark-mode form select,
+body.dark-mode form button {
+    background: var(--dark-gray);
+    color: var (--dark-text-color);
+    border: 1px solid var(--dark-table-header);
+}
+
+body.dark-mode form input:focus,
+body.dark-mode form select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px var(--primary-color);
+}
+
+body.dark-mode form button:hover {
+    background: var(--button-hover-gradient);
+    color: var(--dark-text-color);
+}
+
+/* Form Focus Effects */
+form input:focus, form select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 5px var(--primary-color);
+}
+
+/* Enhance input styling */
+input[type="text"],
+input[type="password"],
+input[type="number"],
+select {
+    width: 95%; /* Slightly smaller width to ensure it fits within the card */
+    padding: 0.75rem;
+    margin: 0.5rem auto; /* Center the input within the card */
+    border: 2px solid var(--light-gray);
+    border-radius: 8px;
+    font-size: 1rem;
+    color: var(--text-color);
+    background: var(--background-gradient);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 8px var(--primary-color);
+    outline: none;
+}
+
+input:hover,
+select:hover {
+    border-color: var(--hover-gray);
+}
+
+input::placeholder {
+    color: var(--hover-gray);
+    font-style: italic;
+}
+
+/* Add subtle animation */
+input {
+    transition: transform 0.2s ease-in-out;
+}
+
+input:focus {
+    transform: scale(1.02);
+}
+
+/* Footer */
+footer {
+    background: var(--footer-gradient);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem; /* Increase gap for better spacing */
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+    border-top: 2px solid var(--primary-color); /* Add top border */
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9rem; /* Slightly smaller text */
+}
+
+footer .social-icons {
+    display: flex;
+    gap: 1.5rem; /* Increase gap for better spacing */
+}
+
+footer .social-icons a {
+    color: white;
+    font-size: 1.5rem; /* Increase icon size */
+    transition: transform 0.3s, color 0.3s;
+}
+
+footer .social-icons a:hover {
+    color: var(--hover-accent-color);
+    transform: scale(1.2); /* Add hover effect */
+}
+
+/* Cards */
+.card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin: 1rem 0;
+    margin: 20px auto;
+}
+
+.card h2, .card h3 {
+    color: var(--text-color);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Cards for Sections */
+section {
+    margin: 0;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+section h2, section h3 {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+/* Tables */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.table th, .table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.table th {
+    background: var(--accent-color);
+    color: white;
+    text-transform: uppercase;
+}
+
+.table td {
+    transition: background 0.3s;
+}
+
+.table tr:hover {
+    background: var(--table-row-hover);
+}
+
+.table tr:hover td {
+    background: var(--table-row-hover);
+}
+
+.table tr:nth-child(even) {
+    background: var(--table-row-alt);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.slide-in {
+    animation: slideIn 0.5s ease-in-out;
+}
+
+/* Currency Emojis Animation */
+.currency-emojis {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    animation: float 3s infinite ease-in-out;
+    font-size: 2rem;
+    margin: 2rem 0;
+}
+
+.currency-emojis span {
+    font-size: 2rem;
+    animation: bounce 2s infinite ease-in-out;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* Utility Classes */
+.text-center {
+    text-align: center;
+}
+
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--hover-gray);
+}
+
+/* Enhanced Hover Effects */
+button:hover, a:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav.menu {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .card {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    nav.menu {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    form {
+        width: 100%;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    nav.menu {
+        display: none;
+        flex-direction: column;
+        gap: 0.5rem;
+        background-color: var(--primary-color);
+        position: absolute;
+        top: 100%; /* Ensure it appears just below the header */
+        right: 0;
+        left: 0;
+        padding: 1rem;
+        z-index: 1000;
+        margin: 0; /* Remove any unintended margins */
+    }
+
+    nav.menu.active {
+        display: flex;
+    }
+
+    header {
+        position: relative; /* Ensure the header is the reference point for the nav */
+    }
+}
+
+@media (max-width: 480px) {
+    form {
+        padding: 0.5rem;
+    }
+
+    .table th, .table td {
+        font-size: 0.875rem;
+    }
+}
+
+/* Icon Button */
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: inherit;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s;
+}
+
+.icon-button:hover {
+    transform: scale(1.2);
+}
+
+/* Enhance link styles */
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: bold;
+    position: relative;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background: var(--accent-color);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease-in-out;
+}
+
+a:hover {
+    color: var(--hover-accent-color);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+a:active {
+    color: var(--accent-color);
+}
+
+/* Home Section Styles */
+
+#home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 80vh;
+    background: var(--background-gradient);
+    padding: 2rem;
+    
+}
+
+#home h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#home p {
+    font-size: 1.25rem;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+    max-width: 600px;
+}
+
+#home a {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+    border-radius: 30px;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#home a:hover {
+    background: linear-gradient(to right, var(--hover-accent-color), var(--primary-color));
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Enhance admin page styling */
+#admin-dashboard {
+    padding: 2rem;
+    background: var(--background-gradient);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 2rem;
+}
+
+#admin-dashboard h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.analytics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.analytics-item {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.analytics-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.analytics-item i {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.analytics-item h4 {
+    font-size: 1.25rem;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+
+.analytics-item p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+.card table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.card table th, .card table td {
+    padding: 0.75rem;
+    text-align: center;
+    border: 1px solid var(--light-gray);
+}
+
+.card table th {
+    background: var(--accent-color);
+    color: white;
+    text-transform: uppercase;
+}
+
+.card table tr:nth-child(even) {
+    background: var(--table-row-alt);
+}
+
+.card table tr:hover {
+    background: var(--table-row-hover);
+}
+
+#charts canvas {
+    max-width: 100%;
+    margin: 0 auto;
+    display: block;
+}
+
+#top-currencies ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#top-currencies ul li {
+    background: var(--light-gray);
+    padding: 0.75rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    font-weight: bold;
+    color: var(--text-color);
+    transition: background 0.3s;
+}
+
+#top-currencies ul li:hover {
+    background: var(--hover-gray);
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, var(--accent-color), var(--hover-accent-color));
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, var(--hover-accent-color), var(--accent-color));
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Use the accent color (numbers color) in more elements */
+
+/* Apply accent color to links */
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: bold;
+    position: relative;
+    transition: color 0mhxf.3s, text-shadow 0.3s;
+}
+
+a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background: var(--accent-color);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease-in-out;
+}
+
+a:hover {
+    color: var(--hover-accent-color);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+a:active {
+    color: var(--accent-color);
+}
+
+/* Apply accent color to buttons */
+.btn {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.btn:hover {
+    background: var(--hover-accent-color);
+    transform: translateY(-3px);
+}
+
+/* Apply accent color to headers */
+h1, h2, h3 {
+    color: var(--dark-text-color);
+}
+
+/* Apply accent color to table headers */
+.table th {
+    background: var(--accent-color);
+    color: white;
+}
+
+/* Add styles for error messages */
+.error-message {
+    color: var(--error-color);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* Enhance input focus and hover effects */
+input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px var(--primary-color);
+    outline: none;
+}
+
+input:hover {
+    border-color: var(--hover-gray);
+}
+
+/* Add subtle animation for error messages */
+.error-message {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Full-height sections */
+.full-height {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Hero Section */
+.hero {
+    margin: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background: linear-gradient(135deg, #4f46e5, #f43f5e);
+    color: white;
+    position: relative;
+    overflow: hidden; /* Ensure elements stay within the hero section */
+}
+
+/* Add animated gradient background */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, rgba(79, 70, 229, 0.8), rgba(244, 63, 94, 0.8), rgba(79, 70, 229, 0.8));
+    background-size: 400% 400%;
+    animation: gradientAnimation 10s ease infinite;
+    z-index: -1;
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Add floating shapes for visual interest */
+.hero .floating-shape {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #4f46e5;
+    animation: float 6s ease-in-out infinite;
+    z-index: 0;
+}
+
+.hero .floating-shape:nth-child(1) {
+    top: 10%;
+    left: 20%;
+    animation-delay: 0s;
+    content: "💵";
+}
+
+.hero .floating-shape:nth-child(2) {
+    top: 50%;
+    left: 70%;
+    animation-delay: 2s;
+    content: "💶";
+}
+
+.hero .floating-shape:nth-child(3) {
+    top: 80%;
+    left: 30%;
+    animation-delay: 4s;
+    content: "💷";
+}
+
+.hero .floating-shape:nth-child(4) {
+    top: 30%;
+    left: 50%;
+    animation-delay: 1s;
+    content: "💴";
+}
+
+.hero .floating-shape:nth-child(5) {
+    top: 70%;
+    left: 10%;
+    animation-delay: 3s;
+    content: "🪙";
+}
+
+/* Enhance call-to-action button */
+.hero .cta-button {
+    background: linear-gradient(to right, #4f46e5, #f43f5e);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.hero .cta-button:hover {
+    background: linear-gradient(to right, #f43f5e, #4f46e5);
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.hero-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.hero .cta-button {
+    background: white;
+    color: #4f46e5;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.hero .cta-button:hover {
+    background: #f43f5e;
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Features Section */
+.features {
+    background: var(--light-gray);
+    text-align: center;
+    padding: 2rem;
+}
+
+.features .section-title {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    justify-items: center;
+}
+
+.feature-item {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative; /* Required for the bar animation */
+    overflow: hidden; /* Hide the bar outside the card */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.feature-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--accent-color);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease-in-out;
+}
+
+.feature-item:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.feature-icon {
+    font-size: 3rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.feature-item:hover .feature-icon {
+    transform: scale(1.2);
+    color: var(--hover-accent-color);
+}
+
+.feature-item h4 {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.feature-item p {
+    color: var(--secondary-color);
+    line-height: 1.6;
+}
+
+/* Exchange Rates Section */
+.exchange-rates {
+    background: #e2e8f0;
+    color: #1e293b;
+}
+
+.exchange-rates h3 {
+    margin-bottom: 1rem;
+    color: #4f46e5;
+}
+
+.exchange-rates table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.exchange-rates th, .exchange-rates td {
+    padding: 1rem;
+    border: 1px solid #cbd5e1;
+    text-align: center;
+}
+
+.exchange-rates th {
+    background: #4f46e5;
+    color: white;
+}
+
+.exchange-rates tr:nth-child(even) {
+    background: #f1f5f9;
+}
+
+#hero {
+    background: var(--background-gradient);
+    color: var(--text-color);
+    padding: 2rem;
+    text-align: center;
+}
+
