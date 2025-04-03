@@ -1,6 +1,6 @@
 :root {
     /* Updated modern color palette */
-    --primary-color: #4f46e5; /* Indigo */
+    --primary-color: #0143b5; /* Indigo */
     --secondary-color: #64748b; /* Slate */
     --accent-color: #f43f5e; /* Rose */
     --background-gradient: linear-gradient(135deg, #f8fafc, #e2e8f0); /* Light Gray */
@@ -12,7 +12,7 @@
     --success-color: #16a34a; /* Green */
     --footer-gradient: linear-gradient(135deg, #1e293b, #0f172a); /* Darker Slate */
     --hover-accent-color: #dc2626; /* Light Rose */
-    --button-hover-gradient: linear-gradient(135deg, #4f46e5, #4338ca); /* Indigo Gradient */
+    --button-hover-gradient: linear-gradient(135deg, #0143b5, #4338ca); /* Indigo Gradient */
     --table-row-hover: #f1f5f9; /* Light Gray */
     --table-row-alt: #e2e8f0; /* Alternate Row */
 
@@ -1031,7 +1031,7 @@ input:hover {
     margin: 0;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    background: linear-gradient(135deg, #4f46e5, #f43f5e);
+    background: linear-gradient(135deg, #0143b5, #f43f5e);
     color: white;
     position: relative;
     overflow: hidden; /* Ensure elements stay within the hero section */
@@ -1045,7 +1045,7 @@ input:hover {
     left: 0;
     width: 200%;
     height: 200%;
-    background: linear-gradient(45deg, rgba(79, 70, 229, 0.8), rgba(244, 63, 94, 0.8), rgba(79, 70, 229, 0.8));
+    background: linear-gradient(45deg, #0143b5, rgba(244, 63, 94, 0.8), #0143b5);
     background-size: 400% 400%;
     animation: gradientAnimation 10s ease infinite;
     z-index: -1;
@@ -1069,7 +1069,7 @@ input:hover {
     justify-content: center;
     font-size: 1.5rem;
     font-weight: bold;
-    color: #4f46e5;
+    color: #0143b5;
     animation: float 6s ease-in-out infinite;
     z-index: 0;
 }
@@ -1111,7 +1111,7 @@ input:hover {
 
 /* Enhance call-to-action button */
 .hero .cta-button {
-    background: linear-gradient(to right, #4f46e5, #f43f5e);
+    background: linear-gradient(to right, #0143b5, #f43f5e);
     color: white;
     padding: 1rem 2rem;
     border-radius: 30px;
@@ -1123,7 +1123,7 @@ input:hover {
 }
 
 .hero .cta-button:hover {
-    background: linear-gradient(to right, #f43f5e, #4f46e5);
+    background: linear-gradient(to right, #f43f5e, #0143b5);
     transform: scale(1.1);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
@@ -1135,7 +1135,7 @@ input:hover {
 
 .hero .cta-button {
     background: white;
-    color: #4f46e5;
+    color: #0143b5;
     padding: 1rem 2rem;
     border-radius: 30px;
     font-size: 1.2rem;
@@ -1235,7 +1235,7 @@ input:hover {
 
 .exchange-rates h3 {
     margin-bottom: 1rem;
-    color: #4f46e5;
+    color: #0143b5;
 }
 
 .exchange-rates table {
@@ -1251,7 +1251,7 @@ input:hover {
 }
 
 .exchange-rates th {
-    background: #4f46e5;
+    background: #0143b5;
     color: white;
 }
 
