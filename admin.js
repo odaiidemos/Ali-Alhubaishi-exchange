@@ -1,6 +1,6 @@
 // Ensure the currencies array is accessible
 const currencies = [
-    { name: "الريال اليمني", code: "YER", rate: 250.00 },
+    { name: "الريال اليمني", code: "YER", rate: 530.00 },
     { name: "الدولار الأمريكي", code: "USD", rate: 1.00 },
     { name: "اليورو", code: "EUR", rate: 0.85 },
     { name: "الجنيه البريطاني", code: "GBP", rate: 0.75 },
@@ -63,7 +63,9 @@ function animateNumber(elementId, start, end, duration) {
 }
 
 // Handle admin login
-document.getElementById('admin-login-btn').addEventListener('click', () => {
+document.getElementById('admin-login-btn').addEventListener('click', (event) => {
+    event.preventDefault(); // Prevent the default form submission
+
     const username = document.getElementById('admin-username').value;
     const password = document.getElementById('admin-password').value;
 
