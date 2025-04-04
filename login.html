@@ -17,10 +17,10 @@
         <section id="auth-section" class="card" style="max-width: 400px;">
             <h2>تسجيل الدخول</h2>
             <form id="login-form">
-                <label for="username">اسم المستخدم:</label>
-                <input type="text" id="username" required>
+                <label for="email">البريد الإلكتروني:</label>
+                <input type="email" id="email" name="email" required>
                 <label for="password">كلمة المرور:</label>
-                <input type="password" id="password" required>
+                <input type="password" id="password" name="password" required>
                 <button type="submit" id="login-btn">تسجيل الدخول</button>
                 <p id="login-error" class="error" style="margin-top: 10px; color: red;"></p>
             </form>
@@ -31,11 +31,11 @@
             <h2>إنشاء حساب</h2>
             <form id="signup-form">
                 <label for="new-username">اسم المستخدم:</label>
-                <input type="text" id="new-username" required>
+                <input type="text" id="new-username" name="new-username" required>
                 <label for="email">البريد الإلكتروني:</label>
-                <input type="email" id="email" required>
+                <input type="email" id="email" name="email" required>
                 <label for="new-password">كلمة المرور:</label>
-                <input type="password" id="new-password" required>
+                <input type="password" id="new-password" name="new-password" required>
                 <label for="interests">اختر اهتماماتك:</label>
                 <select id="interests" name="interests" multiple required>
                     <option value="currency-exchange">تبادل العملات</option>
@@ -101,9 +101,7 @@
             </section>
         </section>
     </main>
-    <script type="module">
-        import { validateLoginForm, validateSignupForm } from './validation.js';
-
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
             const loginSection = document.getElementById('auth-section');
             const signupSection = document.getElementById('signup-section');
@@ -123,81 +121,6 @@
             showLoginLink.addEventListener('click', () => {
                 signupSection.style.display = 'none';
                 loginSection.style.display = 'block';
-            });
-
-            const loginForm = document.getElementById('login-form');
-            const loginError = document.getElementById('login-error');
-
-            loginForm.addEventListener('submit', (event) => {
-                event.preventDefault();
-                const username = document.getElementById('username').value.trim();
-                const password = document.getElementById('password').value.trim();
-
-                const error = validateLoginForm(username, password);
-                if (error) {
-                    loginError.textContent = error;
-                    loginError.style.color = 'red';
-                } else {
-                    const users = JSON.parse(localStorage.getItem('users')) || [];
-                    const user = users.find(user => user.username === username && user.password === password);
-
-                    if (user) {
-                        loginError.textContent = '';
-
-                        loginSection.style.display = 'none';
-                        userInfoSection.style.display = 'block';
-                        document.getElementById('actions-container').style.display = 'flex';
-
-                        userNameSpan.textContent = user.username;
-                        userEmailSpan.textContent = user.email;
-                    } else {
-                        loginError.textContent = 'اسم المستخدم أو كلمة المرور غير صحيحة.';
-                        loginError.style.color = 'red';
-
-                        showSignupLink.style.animation = 'glow 1s infinite alternate';
-                    }
-                }
-            });
-
-            logoutBtn.addEventListener('click', () => {
-                userInfoSection.style.display = 'none';
-                document.getElementById('actions-container').style.display = 'none';
-                loginSection.style.display = 'block';
-            });
-
-            const signupForm = document.getElementById('signup-form');
-            const signupSuccess = document.getElementById('signup-success');
-
-            signupForm.addEventListener('submit', (event) => {
-                event.preventDefault();
-                const newUsername = document.getElementById('new-username').value.trim();
-                const email = document.getElementById('email').value.trim();
-                const newPassword = document.getElementById('new-password').value.trim();
-
-                const error = validateSignupForm(newUsername, email, newPassword);
-                if (error) {
-                    signupSuccess.textContent = error;
-                    signupSuccess.style.color = 'red';
-                } else {
-                    const users = JSON.parse(localStorage.getItem('users')) || [];
-
-                    if (users.some(user => user.username === newUsername)) {
-                        signupSuccess.textContent = 'اسم المستخدم موجود بالفعل.';
-                        signupSuccess.style.color = 'red';
-                        return;
-                    }
-
-                    users.push({ username: newUsername, email, password: newPassword });
-                    localStorage.setItem('users', JSON.stringify(users));
-
-                    signupSuccess.textContent = 'تم إنشاء الحساب بنجاح!';
-                    signupSuccess.style.color = 'green';
-
-                    setTimeout(() => {
-                        signupSuccess.textContent = '';
-                        showLoginLink.click();
-                    }, 2000);
-                }
             });
 
             document.getElementById('select-all-btn').addEventListener('click', () => {
