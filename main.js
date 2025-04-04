@@ -1,6 +1,6 @@
 // List of currencies with their rates
 const currencies = [
-    { name: "الريال اليمني", code: "YER", rate: 250.00 },
+    { name: "الريال اليمني", code: "YER", rate: 530.00 },
     { name: "الدولار الأمريكي", code: "USD", rate: 1.00 },
     { name: "اليورو", code: "EUR", rate: 0.85 },
     { name: "الجنيه البريطاني", code: "GBP", rate: 0.75 },
@@ -86,9 +86,10 @@ if (fromCurrencyDropdown && toCurrencyDropdown) {
     console.warn('Currency dropdown elements not found in the DOM.');
 }
 
-// Fix the issue where all users' balances are updated during currency exchange
+// Ensure the event listener is not added multiple times
 const exchangeBtn = document.getElementById('exchange-btn');
 if (exchangeBtn) {
+    exchangeBtn.replaceWith(exchangeBtn.cloneNode(true)); // Remove any existing listeners
     exchangeBtn.addEventListener('click', () => {
         const fromCurrency = fromCurrencyDropdown.value;
         const toCurrency = toCurrencyDropdown.value;
@@ -117,32 +118,27 @@ if (exchangeBtn) {
         const toRate = currencies.find(currency => currency.code === toCurrency).rate;
         const convertedAmount = ((amount / fromRate) * toRate).toFixed(2);
 
-        // Check if the user has enough balance in the source currency
         if (!loggedInUser.balances[fromCurrency] || loggedInUser.balances[fromCurrency] < amount) {
             document.getElementById('result').textContent = `Insufficient balance in ${fromCurrency}.`;
             document.getElementById('result').style.color = 'red';
             return;
         }
 
-        // Deduct the amount from the source currency
         loggedInUser.balances[fromCurrency] -= amount;
 
-        // Add the converted amount to the target currency
         if (!loggedInUser.balances[toCurrency]) {
             loggedInUser.balances[toCurrency] = 0;
         }
         loggedInUser.balances[toCurrency] += parseFloat(convertedAmount);
 
-        // Update the user data in sessionStorage and localStorage
         sessionStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
         const users = JSON.parse(localStorage.getItem('users')) || [];
         const userIndex = users.findIndex(user => user.email === loggedInUser.email);
         if (userIndex !== -1) {
-            users[userIndex].balances = loggedInUser.balances; // Update only the balances of the logged-in user
+            users[userIndex].balances = loggedInUser.balances;
             localStorage.setItem('users', JSON.stringify(users));
         }
 
-        // Update the displayed balances
         const balancesList = document.getElementById('balances-list');
         balancesList.innerHTML = '';
         for (const [currency, balance] of Object.entries(loggedInUser.balances)) {
@@ -151,7 +147,6 @@ if (exchangeBtn) {
             balancesList.appendChild(listItem);
         }
 
-        // Display success message
         document.getElementById('result').textContent = `Successfully exchanged ${amount} ${fromCurrency} to ${convertedAmount} ${toCurrency}.`;
         document.getElementById('result').style.color = 'green';
     });
@@ -162,12 +157,15 @@ if (exchangeBtn) {
 document.addEventListener('DOMContentLoaded', () => {
     // Handle login
     const loginBtn = document.getElementById('login-btn');
-    loginBtn?.addEventListener('click', () => {
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
+    loginBtn?.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent the default form submission
+
+        const loginForm = document.getElementById('login-form');
+        const email = loginForm.querySelector('#email').value;
+        const password = loginForm.querySelector('#password').value;
 
         const users = JSON.parse(localStorage.getItem('users')) || [];
-        const user = users.find(user => user.username === username && user.password === password);
+        const user = users.find(user => user.email === email && user.password === password);
 
         if (user) {
             // Hide the login section and display the user info section
@@ -181,8 +179,19 @@ document.addEventListener('DOMContentLoaded', () => {
             // Populate user info
             document.getElementById('user-name').textContent = user.username;
             document.getElementById('user-email').textContent = user.email;
+            document.getElementById('account-number').textContent = user.accountNumber;
+
+            const balancesList = document.getElementById('balances-list');
+            balancesList.innerHTML = '';
+            for (const [currency, balance] of Object.entries(user.balances)) {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${currency}: ${currency} ${balance.toFixed(2)}`;
+                balancesList.appendChild(listItem);
+            }
+
+            sessionStorage.setItem('loggedInUser', JSON.stringify(user));
         } else {
-            document.getElementById('login-error').textContent = "اسم المستخدم أو كلمة المرور غير صحيحة.";
+            document.getElementById('login-error').textContent = "البريد الإلكتروني أو كلمة المرور غير صحيحة.";
         }
     });
 
@@ -197,19 +206,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Handle signup
     const signupBtn = document.getElementById('signup-btn');
-    signupBtn?.addEventListener('click', () => {
-        const username = document.getElementById('new-username').value;
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('new-password').value;
+    signupBtn?.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent the default form submission
+
+        const signupForm = document.getElementById('signup-form');
+        const username = signupForm.querySelector('#new-username').value;
+        const email = signupForm.querySelector('#email').value;
+        const password = signupForm.querySelector('#new-password').value;
 
         if (username && email && password) {
             const users = JSON.parse(localStorage.getItem('users')) || [];
-            if (users.some(user => user.username === username)) {
-                document.getElementById('signup-success').textContent = "اسم المستخدم موجود بالفعل.";
+            if (users.some(user => user.email === email)) {
+                document.getElementById('signup-success').textContent = "البريد الإلكتروني موجود بالفعل.";
                 return;
             }
 
-            users.push({ username, email, password });
+            // Generate a unique 10-digit account number
+            const accountNumber = Math.floor(1000000000 + Math.random() * 9000000000).toString();
+
+            // Assign random balances for YER, SAR, and USD
+            const balances = {
+                YER: Math.floor(Math.random() * 100001),
+                SAR: Math.floor(Math.random() * 100001),
+                USD: Math.floor(Math.random() * 100001)
+            };
+
+            users.push({ username, email, password, accountNumber, balances });
             localStorage.setItem('users', JSON.stringify(users));
 
             document.getElementById('signup-success').textContent = "تم إنشاء الحساب بنجاح!";
@@ -264,125 +286,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Call the function to populate exchange rates on page load
     populateExchangeRates();
-});
-
-// Add signup functionality
-const signupForm = document.getElementById('signup-form');
-const signupButton = document.getElementById('signup-btn');
-const signupSuccessMessage = document.getElementById('signup-success');
-
-// Modify the signup logic to include account number and balances
-signupButton.addEventListener('click', () => {
-    const formData = new FormData(signupForm);
-    const username = formData.get('username');
-    const email = formData.get('email');
-    const password = formData.get('password');
-
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-
-    if (users.some(user => user.email === email)) {
-        signupSuccessMessage.textContent = 'Email already exists.';
-        signupSuccessMessage.style.color = 'red';
-        return;
-    }
-
-    // Generate a unique 10-digit account number
-    const accountNumber = Math.floor(1000000000 + Math.random() * 9000000000).toString();
-
-    // Assign random balances for YER, SAR, and USD
-    const balances = {
-        YER: Math.floor(Math.random() * 100001),
-        SAR: Math.floor(Math.random() * 100001),
-        USD: Math.floor(Math.random() * 100001)
-    };
-
-    users.push({ username, email, password, accountNumber, balances });
-    localStorage.setItem('users', JSON.stringify(users));
-
-    signupSuccessMessage.textContent = 'Signup successful!';
-    signupSuccessMessage.style.color = 'green';
-    signupForm.reset();
-});
-
-// Add login functionality
-const loginForm = document.getElementById('login-form');
-const loginButton = document.getElementById('login-btn');
-const loginErrorMessage = document.getElementById('login-error');
-
-// Ensure unique balances are displayed and updated for each user
-document.getElementById('login-btn').addEventListener('click', () => {
-    const formData = new FormData(loginForm);
-    const email = formData.get('email');
-    const password = formData.get('password');
-
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    const user = users.find(user => user.email === email && user.password === password);
-
-    if (!user) {
-        loginErrorMessage.textContent = 'Invalid email or password.';
-        loginErrorMessage.style.color = 'red';
-        return;
-    }
-
-    // Store only the logged-in user's data in sessionStorage
-    sessionStorage.setItem('loggedInUser', JSON.stringify(user));
-
-    // Display user info
-    document.getElementById('account-number').textContent = user.accountNumber;
-
-    const balancesList = document.getElementById('balances-list');
-    balancesList.innerHTML = '';
-    for (const [currency, balance] of Object.entries(user.balances)) {
-        const listItem = document.createElement('li');
-        listItem.textContent = `${currency}: ${balance.toFixed(2)}`;
-        balancesList.appendChild(listItem);
-    }
-
-    // Hide login section and show user info section
-    document.getElementById('auth-section').style.display = 'none';
-    document.getElementById('user-info').style.display = 'block';
-    document.getElementById('actions-container').style.display = 'flex';
-});
-
-// Smooth UI transitions
-const authSection = document.getElementById('auth-section');
-const signupSection = document.getElementById('signup-section');
-const loginSection = document.getElementById('login-section');
-
-function fadeIn(element) {
-    element.style.opacity = 0;
-    element.style.display = 'block';
-    let opacity = 0;
-    const interval = setInterval(() => {
-        opacity += 0.1;
-        element.style.opacity = opacity;
-        if (opacity >= 1) clearInterval(interval);
-    }, 30);
-}
-
-function fadeOut(element) {
-    let opacity = 1;
-    const interval = setInterval(() => {
-        opacity -= 0.1;
-        element.style.opacity = opacity;
-        if (opacity <= 0) {
-            clearInterval(interval);
-            element.style.display = 'none';
-        }
-    }, 30);
-}
-
-const showSignupLink = document.getElementById('show-signup');
-const showLoginLink = document.getElementById('show-login');
-
-showSignupLink.addEventListener('click', () => {
-    fadeOut(loginSection);
-    fadeIn(signupSection);
-});
-
-showLoginLink.addEventListener('click', () => {
-    fadeOut(signupSection);
-    fadeIn(loginSection);
 });
 
 // Handle money transfer
