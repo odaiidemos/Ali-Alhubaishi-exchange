@@ -252,7 +252,7 @@ body.dark-mode #admin-dashboard {
 /* Update dark mode background for statistics cards */
 body.dark-mode .analytics-item {
     background: var(--text-color); /* Use text color for background in dark mode */
-    color: var(--accent-color); /* Ensure text color is readable */
+    color: var (--accent-color); /* Ensure text color is readable */
 }
 
 /* Header */
@@ -1264,5 +1264,14 @@ input:hover {
     color: var(--text-color);
     padding: 2rem;
     text-align: center;
+}
+
+.responsive-menu {
+    display: none;
+}
+
+.responsive-menu.active {
+    display: flex;
+    flex-direction: column;
 }
 
